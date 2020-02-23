@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  <title>Startups</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="{% static 'open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+      <img src="{% static 'logo.svg' %}" height=30 width=30 class="d-inline-block alighn-top" />
+      Startups
+      </a>
+      Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup">Pixelmeetup</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="{% url 'create' %}"><span class="oi oi-plus"></span></a>
+          <a class="nav-item nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
+          <form id="logout" method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="hidden" />
+          </form>
+          {% else %}
+          <a class="nav-item nav-link" href="{% url 'signup' %}">Sign Up</a>
+          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+          {% endif %}
+        </div>
+      </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
