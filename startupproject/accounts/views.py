@@ -6,14 +6,16 @@ from django.contrib import auth
 def signup(request):
     if request.method == "POST":
         # user wants an account
+        hashed_pw1 = bcrypt.hashed_pw(request.POST['password1'].encode('utf8'), bctypt.gensalt)
+        hashed_pw2 = bcrypt.hashed_pw(request.POST['password2'].encode('utf8'), bctypt.gensalt)
         
-        if request.POST['password1'] == request.POST['password2']:
+        if hashed_pw1 == hashed_pw2:
             try:
                 
                 user = User.objects.get(username=request.POST['username'])
                 return render(request, 'accounts/signup.html', {'error': 'Username has already been taken'})
             except User.DoesNotExist:
-                User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                User.objects.create_user(request.POST['username'], password=hashed_pw1)
                 auth.login(request, user)
                 return redirect('home')
         return render(request, 'accounts/signup.html', {'error': 'Password must Match'})
@@ -38,4 +40,5 @@ def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         return redirect('home')
+ 
  
