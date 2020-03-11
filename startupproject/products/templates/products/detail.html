@@ -1,19 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="row">
-  <div class="col-2">
+<link rel="stylesheet" type = "text/stylesheet" href="./detail.css">
+<div class="row product">
+  <div class="col-2" id="product-icon"></div>
     <img src="{{ product.icon.url }}" class="img-fluid" />
   </div>
   <br />
   <hr>
-  <div class="col-10">
+  <div class="col-10 product-title">
     <a href="{{ product.url }}"><h1>{{ product.title }}</h1></a>
   </div>
 </div>
 
-<div class="row">
+<div class="row product-image" id="product-image">
   <div class="col-8">
     <img src="{{ product.image.url }}" class="img-fluid" />
   </div>
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row product-body">
   <div class="col-8">
     <p>{{ product.body }}</p>
   </div>
@@ -39,7 +39,7 @@
 
 <br><br>
 <hr>
-<di class="comment-section">
+<di class="comment-section comment">
   {{comments.count}} Comment{{ comments | pluralize }}
   {% for comment in comments %}
   <blockquote class="blockquote">
